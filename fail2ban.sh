@@ -108,12 +108,12 @@ touch /etc/fail2ban/jail.local
 if [ ${OS} == CentOS ]; then
 cat <<EOF >> /etc/fail2ban/jail.local
 [DEFAULT]
-ignoreip = 127.0.0.1
+ignoreip = 127.0.0.1/8
 bantime = 86400
 maxretry = 3
 findtime = 1800
 
-[ssh-iptables]
+[sshd]
 enabled = true
 filter = sshd
 action = iptables[name=SSH, port=ssh, protocol=tcp]
@@ -125,12 +125,12 @@ EOF
 else
 cat <<EOF >> /etc/fail2ban/jail.local
 [DEFAULT]
-ignoreip = 127.0.0.1
+ignoreip = 127.0.0.1/8
 bantime = 86400
 maxretry = $maxretry
 findtime = 1800
 
-[ssh-iptables]
+[sshd]
 enabled = true
 filter = sshd
 action = iptables[name=SSH, port=ssh, protocol=tcp]
@@ -171,9 +171,5 @@ if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]]; then
   service ssh restart
 fi
 echo ""
-echo 'Telegram Group: https://t.me/functionclub'
-echo 'Google Puls: https://plus.google.com/communities/113154644036958487268'
-echo 'Github: https://github.com/FunctionClub'
-echo 'QQ Group:277717865'
 
 echo "Fail2ban is now runing on this server now!"
